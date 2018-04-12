@@ -5,7 +5,9 @@ var config = require('./config');
 var setupController = require('./controllers/setupController');
 var apiController = require('./controllers/apiController');
 
-var port = process.env.PORT || 1337;
+//var port = process.env.PORT || 1337;
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 1337;
+var ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
 app.use('/assets', express.static(__dirname + '/public'));
 
@@ -15,4 +17,4 @@ mongoose.connect(config.getDbConnectionString());
 setupController(app);
 apiController(app);
 
-app.listen(port);
+app.listen(port,ip);
