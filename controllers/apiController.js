@@ -4,6 +4,11 @@ module.exports=function(app){
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended:true}));
 
+    app.get('/',function(request,response){
+        response.error(404);            
+        response.send('Page not found.Please check URL. ');
+    });
+
     app.get('/api/todos/:uname',function(request,response){
         Todo.find({username:request.params.uname},function(error,todo){
             if(error) throw error;
