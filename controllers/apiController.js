@@ -5,7 +5,7 @@ module.exports=function(app){
     app.use(bodyParser.urlencoded({extended:true}));
 
     app.get('/',function(request,response){
-        response.error(404);            
+               
         response.send('Page not found.Please check URL. ');
     });
 
@@ -49,7 +49,7 @@ module.exports=function(app){
         }
     });
 
-    app.delete('/api/todo',function(request,response){
+    app.delete('/api/todoDelete/:id',function(request,response){
         Todo.findByIdAndRemove(request.body.id,function(error){
             if(error) throw error;
             response.send('Success');
